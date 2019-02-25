@@ -1,6 +1,8 @@
 ---
 title: Building This Blog
 layout: blog-post.hbs
+date: 2019-02-24
+collection: blog
 ---
 
 # Building This Blog
@@ -21,7 +23,11 @@ I will walk through each technical design decision I have made, and if you
 follow these steps (or just fork [the repo]()) you will have an efficient way
 to administer your highly customizable blog. I will not go into UI and specific
 styling choices as I think those are best left UI/UX experts. If you are a
-UI/UX expert, I would love to hear comments on how I did here.
+UI/UX expert, I would love to hear comments on how I did.
+
+I have all the code sitting in [this github
+repo](https://github.com/landonturner/metalsmith-blog-seed). Feel free to bug
+me about any errors or issues there.
 
 ## Project Setup
 
