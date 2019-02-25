@@ -21,10 +21,11 @@ into a fully formed html page using [Metalsmith](https://metalsmith.io/). The
 html file then can be served directly over the internet.
 
 I will walk through each technical design decision I have made, and if you
-follow these steps (or just fork [the repo]()) you will have an efficient way
-to administer your highly customizable blog. I will not go into UI and specific
-styling choices as I think those are best left UI/UX experts. If you are a
-UI/UX expert, I would love to hear comments on how I did.
+follow these steps (or just fork [the
+repo](https://github.com/landonturner/metalsmith-blog-seed)) you will have an
+efficient way to administer your highly customizable blog. I will not go into
+UI and specific styling choices as I think those are best left UI/UX experts.
+If you are a UI/UX expert, I would love to hear comments on how I did.
 
 I have all the code sitting in [this github
 repo](https://github.com/landonturner/metalsmith-blog-seed). Feel free to bug
@@ -678,32 +679,40 @@ production build.
 ```javascript
 // main.js
 import Metalsmith from 'metalsmith';
-import markdown from 'metalsmith-markdown';
+import babel from 'metalsmith-babel';
+import collections from 'metalsmith-collections';
 import layouts from 'metalsmith-layouts';
+import markdown from 'metalsmith-markdown';
 import permalinks from 'metalsmith-permalinks';
 import sass from 'metalsmith-sass';
-import babel from 'metalsmith-babel';
+import debug from 'metalsmith-debug';
 
 const production = process.env.NODE_ENV === 'production';
 
 Metalsmith(__dirname)
   .source('./source')
   .destination('./dist')
-  .clean(false)
+  .clean(true)
 
-  .metadata({ production }) // adds { producion: true } in metadata of
-                            // all files during production builds
+  .metadata({
+    production,
+  })
+
   .use(markdown())
-  .use(permalinks())
+  .use(collections({ sortBy: 'date' }))
+  .use(permalinks({ relative: false }))
   .use(layouts())
 
   .use(sass())
   .use(babel())
 
+  .use(debug())
+
   .build((err) => {
     if (err) throw err;
   });
 ```
+
 I am going to modify the build script in `package.json` a bit to include the
 environment. The watch script will build the project for development, and the
 build script will produce the final output.
@@ -727,10 +736,12 @@ Now running an `npm run build` will mark that it is a production build.
 
 ## Deployment
 
-There are plenty of great ways to deploy a static site. Honestly, you should
-probably just deploy it using [Netlify](https://www.netlify.com) #not-an-ad.
-It's free for one user and if you are only running the static pages created
-here its probably worth saving yourself the headache of administering your own
-setup. I was going to try to self host this blog, but netlify looks pretty
-great and I am going to use that instead.
+There are plenty of great ways to deploy a static site. I have found deploying
+with [Netlify](https://www.netlify.com) _#not-an-ad_ a delight. Their service
+is free for people deploying personal sites. Setting up webhooks for github is
+a snap, so you can be assured that your production branch is always deployed.
+They run build commands on their end so you don't have to worry about saving
+the dist folder anywhere and can keep it excluded in your .gitignore. I will
+walk you through the process of setting up and deploying [the github
+repo](https://github.com/landonturner/metalsmith-blog-seed)
 
