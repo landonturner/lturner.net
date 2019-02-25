@@ -1,3 +1,4 @@
 # Redirects for netlify
-/blog  / 301
-/* /not-found/ 404
+# src    dest     status
+/blog    /        301
+/*       /404/    404

@@ -30,7 +30,7 @@ If you are a UI/UX expert, I would love to hear comments on how I did.
 I have all the code sitting in [this github
 repo](https://github.com/landonturner/metalsmith-blog-seed). Feel free to bug
 me about any errors or issues there. This example has been deployed to Netlify
-[here](https://fixthislink.netlify.com).
+[here](https://metalsmith-blog-seed.netlify.com/).
 
 ## Project Setup
 
@@ -737,12 +737,117 @@ Now running an `npm run build` will mark that it is a production build.
 
 ## Deployment
 
-There are plenty of great ways to deploy a static site. I have found deploying
-with [Netlify](https://www.netlify.com) a delight. _#not-an-ad_. Their service
-is free for people deploying personal sites. Setting up webhooks for github is
-a snap, so you can be assured that your production branch is always deployed.
-They run build commands on their end so you don't have to worry about saving
-the dist folder anywhere and can keep it excluded in your .gitignore. I will
-walk you through the process of setting up and deploying [the github
-repo](https://github.com/landonturner/metalsmith-blog-seed)
+I have found deploying with [Netlify](https://www.netlify.com) a delight.
+_#not-an-ad_. Their service is free for people deploying personal sites.
+Setting up webhooks for github is a snap, so you can be assured that your
+production branch is always deployed.  They run build commands on their end so
+you don't have to worry about saving the dist folder anywhere and can keep it
+excluded in your .gitignore. I will walk you through the process of setting up
+and deploying [the github
+repo](https://github.com/landonturner/metalsmith-blog-seed). Honestly, this is
+the easy part.
+
+### Sign Up and Create New Site
+
+Sign up for the service. Easy peas. I used my github for my identity.  Select
+`New site from Git`. Give Netlify access to your github and blog repo and
+indicate the correct repo for Netlify to use.  It does not matter if your repo
+is private as long as you grant Netlify access.
+
+The only thing you really need take care of is the `Deploy Settings`. As we
+have configured, the build command is `npm run build` and the publish directory
+is `dist/`.
+
+![netlify deploy settings](/images/netlify-deploy-settings.png)
+
+Click the `Deploy Site` button and Netlify will build and deploy your site.
+Once deployed it will assign you a random subdomain. I the example blog name to
+`metalsmith-blog-seed` and the URL is reflected. Similarly this blog is hosted
+through [lturner.netlify.com](https://lturner.netlify.com). I had previously
+bought the lturner.net domain name. I followed the instructions to hook up that
+domain to Netlify by pointing my A record to the netlify load balancer.
+
+Once you set up the domain, Netlify will create ssl certs using
+[letsencrypt](https://letsencrypt.org/). Letsencrypt certs expire every three
+months but thankfully Netlify manages all of that for you. You don't have to
+worry about anything.
+
+### Set up Automatic Deployments with Webhooks
+
+You can setup Netlify to accept webhooks from github on each push. This makes
+any code change to your production branch build and reflect in seconds live in
+production. Navigate to the build settings in Netlify and add a new `Build
+hook`. Name this `github webhook` or similar so you can remember what it is later.
+
+You should see something like the following (note this specific webhook is no
+longer valid).
+
+![netlify build hook](/images/netlify-build-hook.png)
+
+The final step is to setup webhooks in github. Go to your github project
+settings and enable webhooks. Provide the link given by netlify. Do not worry
+about the secret because the url itself provides all the authentication
+necessary.
+
+![github webhook settings](/images/github-webhook-settings.png)
+
+You can verify this setup is working by pushing a change to your blog and
+checking that Netlify built your project.
+
+![netlify deploy](/images/netlify-deploy.png)
+
+### Netlify Redirects and 404
+
+There is one piece of the puzzle that is missing and that is a customized 404
+page. Create the page just like every other page.
+
+```handlebars
+{{!-- layouts/404.hbs --}}
+<!doctype html>
+<html>
+  <head>
+    <title>Not Found</title>
+  </head>
+  <body>
+    <h1>Not Found</h1>
+    <h4>This page does not exist</h4>
+  </body>
+</html>
+```
+
+```markdown
+---
+layout: 404.hbs
+---
+<!-- source/404.md -->
+```
+
+Netlify looks for a special file called `_redirects` located in the `/dist`
+folder that holds all of the redirect information.
+
+```bash
+# source/_redirects
+# Redirects for netlify
+# src    dest     status
+/blog    /        301
+/*       /404/    404
+```
+
+Once pushed and deployed, you can see your 404 page by navigating a page that
+does not exist.
+
+## Closing Thoughts
+
+Metalsmith provides a simple way to make static parts with reusable parts. It
+is simple, yet powerful. I did not go into creating customized plugins, however
+there are tons of things you can do with it.
+
+Netlify is a very convenient, easy to use tool. Deploying a site from github
+was a breeze. The webhook control process was extremely simple.
+
+Hopefully you have found these instructions helpful. I think there is room for
+improvement as I mentioned with the development server. Altogether I find this
+a convenient way to develop the blog and adding new pages from this point on
+should be a breeze. I wish creating beautiful pages was easier, but with a
+little css you can get your site looking great.
 
