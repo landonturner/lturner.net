@@ -13,7 +13,7 @@ const production = process.env.NODE_ENV === 'production';
 Metalsmith(__dirname)
   .source('./source')
   .destination('./dist')
-  .clean(true)
+  .clean(false)
 
   .metadata({
     production,

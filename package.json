@@ -6,6 +6,7 @@
   "author": "Landon Turner",
   "license": "MIT",
   "scripts": {
+    "debug": "DEBUG=metalsmith:* babel-node main.js",
     "build": "NODE_ENV=production babel-node main.js",
     "watch": "nodemon --watch source --watch layouts --watch main.js -e md,scss,hbs,js ./node_modules/.bin/babel-node main.js"
   },

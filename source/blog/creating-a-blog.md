@@ -122,6 +122,39 @@ Start watching and rebuilding automoatically with `npm run watch`. Now if you
 change file ending in `md`, `scss`, `hbs`, or `js` your project will rebuild
 itself.
 
+## Nginx
+
+You should make sure you have [docker](https://www.docker.com/) and
+docker-compose installed on your machine. I find this the easiest way to run
+nginx for development purposes. Getting this server running is important for
+developing the links between pages and using assets.
+
+In our coming steps, metalsmith will output our html to the `dist` folder. If
+you are following step by step, and have not just cloned the repo, you can
+create the dist folder manually and put in a dummy index.html.
+
+I use nginx to do my file serving, but an apache container would serve the same
+purpose here. In a file named `docker-compose.yml`, dump the following yaml:
+
+```yaml
+# docker-compose.yml
+nginx:
+  image: nginx
+  container_name: blag-nginx
+  volumes:
+    - ./dist/:/usr/share/nginx/html
+  ports:
+    - 80:80
+```
+
+Start it with `docker-compose up`. The nice thing about doing it this way is
+that because the dist folder is mounted in the container as a volume, any
+changes are instantly reflected. navigate to
+http://127.0.0.1/blog/awesome-blog-post and you can view your _beautiful_ blog
+post. A further improvement here would be for live reloading on the browser
+whenever something has changed. `webpack-dev-server` has this functionality but
+I have not looked into integrating this yet.
+
 ## Metalsmith
 
 Metalsmith bills itself as a simple, pluggable site generator. There are a lot
@@ -229,7 +262,7 @@ I try to install things that I import directly in my project as dependencies
 jstransformers, etc) into dev dependencies.
 
 Lets wrap our awesome blog post in html. Create a folder named `layouts` and
-start writing our handlebars template. We have two fields here that we will
+start writing our handlebars layout. We have two fields here that we will
 address in a moment in our markdown file. Notice that content has three
 curlies, because we do not want the content HTML encoded. The title should be
 html encoded, so we use two curlies.
@@ -249,12 +282,12 @@ html encoded, so we use two curlies.
 
 In metalsmith, `contents` refers to the body of the document. It started as
 markdown, and then the markdown plugin converted it to html, and now we are
-going to insert it into this blog post template. For more information on how
+going to insert it into this blog post layout. For more information on how
 metalsmith works under the hood, check out the [metalsmith
 documentation](https://metalsmith.io/#how-does-it-work-in-more-detail-)
 
 We can add metadata to each file using
-[frontmatter]https://middlemanapp.com/basics/frontmatter/) located at the start
+[frontmatter](https://middlemanapp.com/basics/frontmatter/) located at the start
 of the markdown. The metadata we add is exposed to each plugin, and we can use
 it in our layout. The `{{ title }}` expression in the layout file will be
 populated from our frontmatter.
@@ -301,37 +334,80 @@ favorite browser and look at it. Its ugly, but it's unfortunately your baby, so
 you have to love it. Protip the command `open .` on a mac will open the current
 folder in finder. 
 
-## Nginx
+### Debugging
 
-You should make sure you have [docker](https://www.docker.com/) and
-docker-compose installed on your machine. I find this the easiest way to run
-nginx for development purposes.
+I had to do some debugging to figure out what was going on with the collections
+in the next section, so I figured introducing the debugging here might help
+solve potential issues in the coming sections. The debugger is straightforward.
+It just prints out information about the current metalsmith state. You can use
+this information to inform the availability of variables in your layouts, or
+help with plugin ordering issues.
 
-You can open this file in your browser just fine, but in our next section, we
-are going to need to reference other files on a relative basis (css styles, and
-js sources), so we are going to need some way to serve up our site during
-development. We should get a basic nginx container working with docker so we
-can continue to chug along. Docker makes this all very simple. In a file
-named `docker-compose.yml`, dump the following yaml:
-
-```yaml
-# docker-compose.yml
-nginx:
-  image: nginx
-  container_name: blag-nginx
-  volumes:
-    - ./dist/:/usr/share/nginx/html
-  ports:
-    - 80:80
+```
+npm install --save metalsmith-debug
 ```
 
-Start it with `docker-compose up`. You have a server! The nice thing about
-doing it this way is that because the dist folder is mounted in the container
-as a volume, any changes are instantly reflected. navigate to
-http://127.0.0.1/blog/awesome-blog-post and you can view your _beautiful_ blog
-post. A further improvement here would be for live reloading on the browser
-whenever something has changed. `webpack-dev-server` has this functionality but
-I have not looked into integrating this yet.
+Calling the debugger like this `.use(debug())` in metalsmith shows you a
+picture of the current pipeline state. To run it you need to provide the
+environment variable `DEBUG=metalsmith:*`. The metalsmith debugger uses
+[debug](https://github.com/visionmedia/debug) internally which is where that
+notation comes from. I added the following script in my package.json for ease
+of use.
+
+```
+"debug": "DEBUG=metalsmith:* babel-node main.js",
+```
+
+### Permalinks
+
+Let's clean things up a a bit using
+[metalsmith-permalinks](https://github.com/segmentio/metalsmith-permalinks).
+This library allows us to organize our markdown in a more human readable way
+and still maintain the generated index files.
+
+```
+npm install --save metalsmith-permalinks
+```
+
+I am going to move all of the markdown files.
+
+```
+/source/blog/awesome-blog-post/index.md -> /source/blog/awesome-blog-post.md
+```
+
+It will automatically translate your blog posts into the index.html format we
+were doing manually before. Another important thing that permalinks does is add
+a `path` variable on each file. I had to do some experimentation to find the
+correct part of the stack to put the permalinks call. I found the sweet spot
+after the markdown call and before the layouts call. Too early in the stack and
+the path would reflect the markdown filetype, and too late and it had an
+unnecessary index.html at the end.
+
+```
+// main.js
+import Metalsmith from 'metalsmith';
+import layouts from 'metalsmith-layouts';
+import markdown from 'metalsmith-markdown';
+import permalinks from 'metalsmith-permalinks';
+import debug from 'metalsmith-debug';
+
+Metalsmith(__dirname)
+  .source('./source')
+  .destination('./dist')
+  .clean(false)
+
+  .use(markdown())
+  .use(permalinks())
+  .use(layouts())
+
+  .use(debug())
+
+  .build((err) => {
+    if (err) throw err;
+  });
+```
+
+### Images
 
 ### Styling and Javascript
 
@@ -413,9 +489,11 @@ Metalsmith(__dirname)
 
 From this point you have a prety solid setup to create your html pages. Every
 new blog post can easily created adding another markdown file and rebuilding.
-Add in another template for your main page and you have yourself a website! If
+Add in another layout for your main page and you have yourself a website! If
 you want help making this site not look like trash, you're going to probably
 have to do what I am about to do and spend hours tweaking it. 
+
+### Indexes Using Collections
 
 ## Production Build
 
@@ -472,7 +550,7 @@ build script will produce the final output.
 
 ### Adding Production HTML
 
-In our template we can wrap our google analyitcs tag in an if statment
+In our layout we can wrap our google analyitcs tag in an if statment
 
 ```
 {{!-- layouts/blog-post.hbs --}}
