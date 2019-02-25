@@ -1,0 +1,7 @@
+nginx:
+  image: nginx
+  container_name: blag-nginx
+  volumes:
+    - ./dist/:/usr/share/nginx/html
+  ports:
+    - 80:80

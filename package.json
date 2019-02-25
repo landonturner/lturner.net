@@ -1,0 +1,31 @@
+{
+  "name": "lturner.net",
+  "version": "1.0.0",
+  "description": "Personal Website",
+  "main": "main.js",
+  "author": "Landon Turner",
+  "license": "MIT",
+  "scripts": {
+    "build": "NODE_ENV=production babel-node main.js",
+    "watch": "nodemon --watch source --watch layouts --watch main.js -e md,scss,hbs,js ./node_modules/.bin/babel-node main.js"
+  },
+  "dependencies": {
+    "metalsmith": "^2.3.0",
+    "metalsmith-babel": "^5.1.0",
+    "metalsmith-layouts": "^2.3.0",
+    "metalsmith-markdown": "^1.2.0",
+    "metalsmith-sass": "^1.6.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/node": "^7.2.2",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.3.1",
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "jstransformer-handlebars": "^1.1.0",
+    "nodemon": "^1.18.10"
+  }
+}
