@@ -723,13 +723,14 @@ build script will produce the final output.
 
 ### Adding Production HTML
 
-In our layout we can wrap our google analyitcs tag in an if statment
+In our layout we can wrap our google analyitcs tag (or any other production
+only code) in an if statment
 
 ```handlebars
 {{!-- layouts/blog-post.hbs --}}
-    {{#if production}}
-    <div>GOOOOOOGLE ANNNNNNNALYITCS</div>
-    {{/if}}
+{{#if production}}
+<div>GOOOOOOGLE ANNNNNNNALYITCS</div>
+{{/if}}
 ```
 
 Now running an `npm run build` will mark that it is a production build.
