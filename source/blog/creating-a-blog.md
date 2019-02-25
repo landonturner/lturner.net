@@ -468,6 +468,7 @@ in your metalsmith call chain.
 import Metalsmith from 'metalsmith';
 import markdown from 'metalsmith-markdown';
 import layouts from 'metalsmith-layouts';
+import permalinks from 'metalsmith-permalinks';
 import sass from 'metalsmith-sass';
 import babel from 'metalsmith-babel';
 
@@ -477,10 +478,13 @@ Metalsmith(__dirname)
   .clean(false)
 
   .use(markdown())
+  .use(permalinks())
   .use(layouts())
 
   .use(sass()) // converts scss -> css
   .use(babel()) // converts modern js -> classic js
+
+  .use(debug())
 
   .build((err) => {
     if (err) throw err;
@@ -508,16 +512,10 @@ production build.
 
 ```javascript
 // main.js
-
-...
-
-
-Metalsmith(__dirname)
-...
-// main.js
 import Metalsmith from 'metalsmith';
 import markdown from 'metalsmith-markdown';
 import layouts from 'metalsmith-layouts';
+import permalinks from 'metalsmith-permalinks';
 import sass from 'metalsmith-sass';
 import babel from 'metalsmith-babel';
 
@@ -531,6 +529,7 @@ Metalsmith(__dirname)
   .metadata({ production }) // adds { producion: true } in metadata of
                             // all files during production builds
   .use(markdown())
+  .use(permalinks())
   .use(layouts())
 
   .use(sass())
