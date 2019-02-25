@@ -5,14 +5,15 @@ date: 2019-02-24
 collection: blog
 ---
 
-# Building This Blog
+# Building This Blog With Metalsmith, Netlify, and Disqus
 
 There are many blogging platforms that are great and easy to use. However, I
 like to have more direct control over the source files, and I want my blog to
 live under my own domain name. Another requirement for this project is that
 each subsequent post should be easy to create. Finally, I need to be able to
 see my changes reflected quickly in the browser. This post will detail how to
-setup a dev environment to generate such a blog.
+setup a dev environment to generate such a blog, deploy it to Netlify, and
+allow comments with disqus.
 
 Each individual post in the blog we will make will be a simple
 [Markdown](https://en.wikipedia.org/wiki/Markdown) file that gets translated
@@ -27,7 +28,8 @@ UI/UX expert, I would love to hear comments on how I did.
 
 I have all the code sitting in [this github
 repo](https://github.com/landonturner/metalsmith-blog-seed). Feel free to bug
-me about any errors or issues there.
+me about any errors or issues there. This example has been deployed to Netlify
+[here](https://fixthislink.netlify.com).
 
 ## Project Setup
 
@@ -358,6 +360,30 @@ of use.
 "debug": "DEBUG=metalsmith:* babel-node main.js",
 ```
 
+```javascript
+// main.js
+import Metalsmith from 'metalsmith';
+import markdown from 'metalsmith-markdown';
+import layouts from 'metalsmith-layouts';
+import debug from 'metalsmith-debug';
+
+Metalsmith(__dirname)
+  .source('./source')
+  .destination('./dist')
+  .clean(false)
+
+  .use(markdown())
+  .use(debug()) // placed here, debug will output the metalsmith context
+  				// before layouts has run but after markdown has run
+  .use(layouts())
+
+  .build((err) => {
+    if (err) throw err;
+  });
+```
+
+Run it with `npm run debug`.
+
 ### Permalinks
 
 Let's clean things up a a bit using
@@ -388,8 +414,8 @@ unnecessary index.html at the end.
 import Metalsmith from 'metalsmith';
 import layouts from 'metalsmith-layouts';
 import markdown from 'metalsmith-markdown';
-import permalinks from 'metalsmith-permalinks';
 import debug from 'metalsmith-debug';
+import permalinks from 'metalsmith-permalinks';
 
 Metalsmith(__dirname)
   .source('./source')
@@ -397,7 +423,7 @@ Metalsmith(__dirname)
   .clean(false)
 
   .use(markdown())
-  .use(permalinks())
+  .use(permalinks({ relative: false }))
   .use(layouts())
 
   .use(debug())
@@ -407,7 +433,56 @@ Metalsmith(__dirname)
   });
 ```
 
+I have included `{ relative: false }` in the options because I do not like the
+way it was copying assets to each blog post. Refer to the
+[permalinks documentation](https://github.com/segmentio/metalsmith-permalinks#relative-files)
+for more information about this option.
+
 ### Images
+
+Every good blog post has images associated. I took a cat photo because who doesn't love cat photos. I saved it under `source/images/cat.jpg`. That photo then gets directly translated to our dist folder and we can reference it in our layouts or in the markdown itself.
+
+##### In layouts
+Add something like this to your blog layout
+```
+{{#if headerImage}}
+<img src="{{ headerImage }}" alt="header">
+{{/if}}
+```
+
+and this to your frontmatter
+```
+---
+title: Awesome Blog Post
+layout: blog-post.hbs
+headerImage: /images/cat.jpg
+---
+```
+
+It will appear as your header image on the blog post. This way might make the
+image slightly easier to style in css with customized classes. That if
+statement surrounding the image call in the layout allows for the blog post to
+be imageless. Without that, no image would appear as a ugly broken image.
+
+##### Markdown image syntax
+
+Markdown provides an easy way to insert images. Here is an example of how to
+include images in markdown
+
+```
+---
+title: Example Image
+layout: blog-post.hbs
+---
+
+# Example Image
+
+This will put the cat image inline with text ![cat](/images/cat.jpg)
+
+and this will place the cat image on its own line
+
+![cat](/images/cat.jpg)
+```
 
 ### Styling and Javascript
 
@@ -469,6 +544,7 @@ import Metalsmith from 'metalsmith';
 import markdown from 'metalsmith-markdown';
 import layouts from 'metalsmith-layouts';
 import permalinks from 'metalsmith-permalinks';
+import debug from 'metalsmith-debug';
 import sass from 'metalsmith-sass';
 import babel from 'metalsmith-babel';
 
@@ -497,7 +573,96 @@ Add in another layout for your main page and you have yourself a website! If
 you want help making this site not look like trash, you're going to probably
 have to do what I am about to do and spend hours tweaking it. 
 
-### Indexes Using Collections
+### Creating an Index Using Collections
+
+Finally no blog is complete without being able to click around and navigate all
+the blog posts! Up to this point, we have been navigating directly to each
+post.  We can make this better using
+[metalsmith-collections](https://github.com/segmentio/metalsmith-collections).
+Collections allows us to mark specific files to be grouped together and
+accessed from any layout.
+
+```
+npm install --save metalsmith-collections
+```
+
+```javascript
+// main.js
+import Metalsmith from 'metalsmith';
+import markdown from 'metalsmith-markdown';
+import layouts from 'metalsmith-layouts';
+import debug from 'metalsmith-debug';
+import permalinks from 'metalsmith-permalinks';
+import sass from 'metalsmith-sass';
+import babel from 'metalsmith-babel';
+import collections from 'metalsmith-collections';
+
+Metalsmith(__dirname)
+  .source('./source')
+  .destination('./dist')
+  .clean(false)
+
+  .use(markdown())
+  .use(collections({ sortBy: 'date' })) // groups files containing
+                                        // collections key on frontmatter
+  .use(permalinks({ relative: false }))
+  .use(layouts())
+
+  .use(sass())
+  .use(babel())
+
+  .use(debug())
+
+  .build((err) => {
+    if (err) throw err;
+  });
+```
+
+```
+---
+title: Awesome Blog Post
+layout: blog-post.hbs
+collection: blog
+headerImage: /images/cat.jpg
+---
+```
+
+If you put the debug after the collections call, you can see that in the
+metadata there is now a `collections` object and a `blogs` object. Lets create a main page that adds a link to all the blog posts.
+
+```html
+{{!-- layouts/main.hbs --}
+<html>
+  <head>
+    <title>My Awesome Blog</title>
+  </head>
+  <body>
+    <h1>This is my awesome blog!</h1>
+    <h4>Enjoy</h4>
+
+    <ul>
+      {{#each blogs}}
+        <li><a href={{this.path}}>{{this.title}}</a></li>
+      {{/each}}
+    </ul>
+  </body>
+</html>
+```
+
+And lets add an empty markdown file to build this layout. This is necessary to
+tell metalsmith that we should be using the layout. It does not matter that
+there is no content in the markdown, and it wouldn't matter anyway because we
+did not put any `{{{ content }}}` calls in our layout.
+
+```
+---
+layout: main.hbs
+---
+<!-- source/index.md -->
+```
+
+Now we have a main page located at the root (http://localhost) that has a list
+of all our blog posts.
 
 ## Production Build
 
