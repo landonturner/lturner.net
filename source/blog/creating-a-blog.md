@@ -5,7 +5,7 @@ date: 2019-02-24
 collection: blog
 ---
 
-# Building This Blog With Metalsmith, Netlify, and Disqus
+# Building This Blog With Metalsmith and Netlify
 
 There are many blogging platforms that are great and easy to use. However, I
 like to have more direct control over the source files, and I want my blog to
@@ -53,7 +53,7 @@ have to change main.js to suit your own needs.
 
 Install babel with the following npm commands
 
-```
+```bash
 npm install --save-dev @babel/cli @babel/core @babel/node @babel/polyfill @babel/preset-env
 ```
 
@@ -74,7 +74,7 @@ run our code. Much more useful. Running `./node_modules/.bin/babel-node
 main.js` will execute our main.js file. I find it tedious to run that command
 by hand each time, so I added a script into the package.json like this:
 
-```
+```json
   ...
   "scripts": {
     "build": "babel-node main.js"
@@ -90,7 +90,7 @@ now.
 
 Here is what my directory structure looks like
 
-```
+```bash
 $ tree -I node_modules -a
 .
 |-- .eslintrc.yml
@@ -111,13 +111,13 @@ that will watch your filesystem and run a command whenever it detects a file
 has been changed. We can configure it to watch all our markdown, layout, js, and
 style files and rebuild the site for us.
 
-```
+```bash
 npm install --save-dev nodemon
 ```
 
 Add this script into your package.json
 
-```
+``` json
 "watch": "nodemon --watch source --watch layouts -e md,scss,hbs,js ./node_modules/.bin/babel-node main.js"
 ```
 
@@ -170,7 +170,7 @@ the the destination folder. With no plugins at all the destination folder looks
 exactly like the source folder. The first plugin `metalsmith-markdown` we will
 introduce will translate the markdown into raw html.
 
-```
+```bash
 npm install --save metalsmith metalsmith-markdown
 ```
 
@@ -214,7 +214,7 @@ Metalsmith(__dirname)
 Run it with `npm run build`. It should run without errors and produce our html
 file in the newly created `dist` folder.
 
-```
+```bash
 $ tree -I node_modules
 .
 |-- babel.config.js
@@ -270,7 +270,7 @@ address in a moment in our markdown file. Notice that content has three
 curlies, because we do not want the content HTML encoded. The title should be
 html encoded, so we use two curlies.
 
-```html
+```handlebars
 {{!-- layouts/blog-post.hbs --}}
 <!doctype html>
 <html>
@@ -346,7 +346,7 @@ It just prints out information about the current metalsmith state. You can use
 this information to inform the availability of variables in your layouts, or
 help with plugin ordering issues.
 
-```
+```bash
 npm install --save metalsmith-debug
 ```
 
@@ -357,7 +357,7 @@ environment variable `DEBUG=metalsmith:*`. The metalsmith debugger uses
 notation comes from. I added the following script in my package.json for ease
 of use.
 
-```
+```json
 "debug": "DEBUG=metalsmith:* babel-node main.js",
 ```
 
@@ -392,7 +392,7 @@ Let's clean things up a a bit using
 This library allows us to organize our markdown in a more human readable way
 and still maintain the generated index files.
 
-```
+```bash
 npm install --save metalsmith-permalinks
 ```
 
@@ -410,7 +410,7 @@ after the markdown call and before the layouts call. Too early in the stack and
 the path would reflect the markdown filetype, and too late and it had an
 unnecessary index.html at the end.
 
-```
+```javascript
 // main.js
 import Metalsmith from 'metalsmith';
 import layouts from 'metalsmith-layouts';
@@ -445,14 +445,14 @@ Every good blog post has images associated. I took a cat photo because who doesn
 
 ##### In layouts
 Add something like this to your blog layout
-```
+```handlebars
 {{#if headerImage}}
 <img src="{{ headerImage }}" alt="header">
 {{/if}}
 ```
 
 and this to your frontmatter
-```
+```markdown
 ---
 title: Awesome Blog Post
 layout: blog-post.hbs
@@ -470,7 +470,7 @@ be imageless. Without that, no image would appear as a ugly broken image.
 Markdown provides an easy way to insert images. Here is an example of how to
 include images in markdown
 
-```
+```markdown
 ---
 title: Example Image
 layout: blog-post.hbs
@@ -498,14 +498,14 @@ friendly js.
 
 The examples just contain some dummy data for example purposes.
 
-```
+```bash
 npm install --save metalsmith-sass metalsmith-babel
 ```
 
-```js
+```javascript
 // source/assets/app.js
 const square = x => x * x;
-square(123);
+console.log(square(123));
 ```
 
 ```scss
@@ -520,7 +520,7 @@ body {
 
 To make load them in the html I am going to add them to the layout.
 
-```html
+```handlebars
 {{!-- layouts/blog-post.hbs --}}
 <!doctype html>
 <html>
@@ -583,7 +583,7 @@ post.  We can make this better using
 Collections allows us to mark specific files to be grouped together and
 accessed from any layout.
 
-```
+```bash
 npm install --save metalsmith-collections
 ```
 
@@ -619,7 +619,7 @@ Metalsmith(__dirname)
   });
 ```
 
-```
+```markdown
 ---
 title: Awesome Blog Post
 layout: blog-post.hbs
@@ -655,7 +655,7 @@ tell metalsmith that we should be using the layout. It does not matter that
 there is no content in the markdown, and it wouldn't matter anyway because we
 did not put any `{{{ content }}}` calls in our layout.
 
-```
+```markdown
 ---
 layout: main.hbs
 ---
@@ -717,7 +717,7 @@ I am going to modify the build script in `package.json` a bit to include the
 environment. The watch script will build the project for development, and the
 build script will produce the final output.
 
-```
+```bash
 "build": "NODE_ENV=production babel-node main.js",
 ```
 
@@ -725,7 +725,7 @@ build script will produce the final output.
 
 In our layout we can wrap our google analyitcs tag in an if statment
 
-```
+```handlebars
 {{!-- layouts/blog-post.hbs --}}
     {{#if production}}
     <div>GOOOOOOGLE ANNNNNNNALYITCS</div>
