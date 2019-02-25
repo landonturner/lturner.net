@@ -737,7 +737,7 @@ Now running an `npm run build` will mark that it is a production build.
 ## Deployment
 
 There are plenty of great ways to deploy a static site. I have found deploying
-with [Netlify](https://www.netlify.com) _#not-an-ad_ a delight. Their service
+with [Netlify](https://www.netlify.com) a delight. _#not-an-ad_. Their service
 is free for people deploying personal sites. Setting up webhooks for github is
 a snap, so you can be assured that your production branch is always deployed.
 They run build commands on their end so you don't have to worry about saving
