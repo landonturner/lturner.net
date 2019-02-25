@@ -1,0 +1,3 @@
+# Redirects for netlify
+/blog  / 301
+/* /not-found/ 404

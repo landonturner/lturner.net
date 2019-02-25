@@ -13,7 +13,7 @@ const production = process.env.NODE_ENV === 'production';
 Metalsmith(__dirname)
   .source('./source')
   .destination('./dist')
-  .clean(false)
+  .clean(true)
 
   .metadata({
     production,
@@ -21,7 +21,7 @@ Metalsmith(__dirname)
 
   .use(markdown())
   .use(collections({ sortBy: 'date' }))
-  .use(permalinks())
+  .use(permalinks({ relative: false }))
   .use(layouts())
 
   .use(sass())
