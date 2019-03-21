@@ -1,11 +1,23 @@
+$font-main: 'Roboto', sans-serif;
+$font-heading: 'Source Code Pro', serif;
+
 html, body {
   margin: 0;
   background-color: rgb(29, 29, 29);
   color: rgb(220, 220, 220);
+  font-family: $font-main;
 }
 
 h1 {
   margin-top: 3rem;
+}
+
+h1, h2, h3 {
+  font-family: $font-heading;
+}
+
+.navbar-brand {
+  font-family: $font-heading;
 }
 
 .date {
