@@ -2,8 +2,9 @@
 title: Building This Blog
 layout: blog-post.hbs
 date: 2019-02-24
+displayDate: February 24, 2019
 collection: blog
-description: "Explore one technique to build a static site and blog using markdown and javascript. Control the entire process and own your content completely. Easily connect to Netlify and deploy in seconds."
+description: Explore one technique to build a static site and blog using markdown and javascript. Control the entire process and own your content completely. Easily connect to Netlify and deploy in seconds.
 ---
 
 ## Why Build My Own Blog Setup

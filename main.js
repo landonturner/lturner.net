@@ -8,12 +8,7 @@ import permalinks from 'metalsmith-permalinks';
 import sass from 'metalsmith-sass';
 import debug from 'metalsmith-debug';
 
-import Handlebars from 'handlebars';
-import HandlebarsIntl from 'handlebars-intl';
-
 const production = process.env.NODE_ENV === 'production';
-
-HandlebarsIntl.registerWith(Handlebars);
 
 Metalsmith(__dirname)
   .source('./source')
