@@ -1,28 +1,43 @@
 ---
-title: Building This Blog
+title: Building This Blog With Metalsmith and Netlify
 layout: blog-post.hbs
 date: 2019-02-24
 collection: blog
+description: "Explore one technique to build a static site and blog using markdown and javascript. Control the entire process and own your content completely. Easily connect to Netlify and deploy in seconds."
 ---
 
-# Building This Blog With Metalsmith and Netlify
+## Why Build My Own Blog Setup
 
-There are many blogging platforms that are great and easy to use. However, I
-like to have more direct control over the source files, and I want my blog to
-live under my own domain name. Another requirement for this project is that
-each subsequent post should be easy to create. Finally, I need to be able to
-see my changes reflected quickly in the browser. This post will detail how to
-setup a dev environment to generate such a blog, deploy it to Netlify, and
-allow comments with disqus.
+There are many blogging platforms that are simple to use and very effective.
+This is not one of those platforms. The stongest (or weakest) reason I have
+chosen to create this is that I simply like building things. I like owning
+all my data and controlling the entire process. I get to style the posts
+exactly how I want. It's very satisfying to build something from (almost)
+nothing and put it out there in the world. I say almost because I am using
+readily available open source code and am using a third party for hosting.
+I'm not a savage!
+
+## Requirements
+
+This is going to be a blog, so obviously it needs to have different pages for
+each topic I decide to write about, starting with this one. It needs to live
+under my own domain name. Each blog post will be a standard markdown file. I
+need to be able to have a resonably quick feedback loop to see my changes
+reflected in a browser during development and authoring. This post will
+detail how to setup a such an environment, deploy it to Netlify, and allow
+comments with disqus.
 
 Each individual post in the blog we will make will be a simple
 [Markdown](https://en.wikipedia.org/wiki/Markdown) file that gets translated
-into a fully formed html page using [Metalsmith](https://metalsmith.io/). The
-html file then can be served directly over the internet.
+into a fully formed html page. I have some experience with
+[Metalsmith](https://metalsmith.io/), which will be the beating heart for
+this conversion. The produced html files then can be served directly over the
+internet.
 
 This code for this blog is hosted publicy on
 [github](https://github.com/landonturner/lturner.net) and the blog itself is
-hosted using [Netlify](https://netlify.com) for free with their personal tier.
+hosted using [Netlify](https://netlify.com) for free with their personal
+tier. Thanks Netlify.
 
 ## Technical
 

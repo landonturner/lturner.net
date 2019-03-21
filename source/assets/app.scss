@@ -1,19 +1,13 @@
-body {
+html, body {
   margin: 0;
+  background-color: rgb(29, 29, 29);
+  color: rgb(220, 220, 220);
 }
 
-pre {
-  background-color: #f6f8fa;
-  padding: 16px;
+h1 {
+  margin-top: 3rem;
 }
 
-.markdown-body {
-  & > p code {
-    background-color: rgba(27,31,35,.05);
-    padding: .2em .4em;
-    color: black;
-    margin: 0;
-    font-size: 85%;
-  }
+.date {
+  color: rgb(99, 99, 99);
 }
-
