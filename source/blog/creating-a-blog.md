@@ -1,5 +1,5 @@
 ---
-title: Building This Blog With Metalsmith and Netlify
+title: Building This Blog
 layout: blog-post.hbs
 date: 2019-02-24
 collection: blog
@@ -9,13 +9,13 @@ description: "Explore one technique to build a static site and blog using markdo
 ## Why Build My Own Blog Setup
 
 There are many blogging platforms that are simple to use and very effective.
-This is not one of those platforms. The stongest (or weakest) reason I have
-chosen to create this is that I simply like building things. I like owning
-all my data and controlling the entire process. I get to style the posts
-exactly how I want. It's very satisfying to build something from (almost)
-nothing and put it out there in the world. I say almost because I am using
-readily available open source code and am using a third party for hosting.
-I'm not a savage!
+This is not one of those platforms. The stongest (but maybe the weakest)
+reason I have chosen to create this is that I simply like building things. I
+like owning all my data and controlling the entire process. I get to style
+the posts exactly how I want. It's very satisfying to build something from
+(almost) nothing and put it out there in the world. I say almost because I am
+using readily available open source code and am using a third party for
+hosting. I'm not a savage!
 
 ## Requirements
 
@@ -24,8 +24,7 @@ each topic I decide to write about, starting with this one. It needs to live
 under my own domain name. Each blog post will be a standard markdown file. I
 need to be able to have a resonably quick feedback loop to see my changes
 reflected in a browser during development and authoring. This post will
-detail how to setup a such an environment, deploy it to Netlify, and allow
-comments with disqus.
+detail how to setup a such an environment and deploy it to Netlify.
 
 Each individual post in the blog we will make will be a simple
 [Markdown](https://en.wikipedia.org/wiki/Markdown) file that gets translated
@@ -189,4 +188,3 @@ wish.
 Netlify was very convenient and extremely simple to set up. The entire setup
 and eployment of my site (including webhook setup and dns migration) took about
 5 minutes.
-

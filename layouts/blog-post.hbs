@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>{{ title }}</title>
+    <title>{{title}}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/app.css">
     <link rel="stylesheet" href="/assets/blog.css">
@@ -30,7 +30,7 @@
       <a class="navbar-brand" href="/">Landon Turner</a>
       <div class="navbar-nav">
         <a class="nav-item nav-link py-0" href="https://twitter.com/landorturn">
-          <img src="/assets/twitter.png" width="40" height="40"  alt="">
+          <img src="/images/twitter.png" width="40" height="40"  alt="">
         </a>
       </div>
     </nav>
@@ -38,7 +38,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <h1>{{ title }}</h1>
+          <h1>{{title}}</h1>
         </div>
       </div>
 
@@ -48,9 +48,9 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row mt-3">
         <div class="col markdown-body">
-          {{{ contents }}}
+          {{{contents}}}
         </div>
       </div>
 
@@ -66,8 +66,8 @@
 <script>
 {{#if production}}
 var disqus_config = function () {
-  this.page.url = 'https://lturner.net/{{ path }}';
-  this.page.identifier = '{{ path }}';
+  this.page.url = 'https://lturner.net/{{path}}';
+  this.page.identifier = '{{path}}';
 };
 (function() { var d = document, s = d.createElement('script'); s.src = 'https://lturner-net.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })();
 {{/if}}
