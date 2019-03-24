@@ -18,6 +18,9 @@ the posts exactly how I want. It's very satisfying to build something from
 using readily available open source code and am using a third party for
 hosting. I'm not a savage!
 
+As a note, the github is a living repo, and these files are subject to change.
+Some already have!
+
 ## Requirements
 
 This is going to be a blog, so obviously it needs to have different pages for
