@@ -7,6 +7,7 @@ import markdown from 'metalsmith-markdown';
 import permalinks from 'metalsmith-permalinks';
 import sass from 'metalsmith-sass';
 import debug from 'metalsmith-debug';
+import discoverPartials from 'metalsmith-discover-partials';
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -22,6 +23,11 @@ Metalsmith(__dirname)
   .use(markdown())
   .use(collections({ sortBy: 'date' }))
   .use(permalinks({ relative: false }))
+
+  .use(discoverPartials({
+    directory: 'layouts/partials',
+    pattern: /\.hbs$/,
+  }))
   .use(layouts())
 
   .use(sass())
