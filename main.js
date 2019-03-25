@@ -21,7 +21,12 @@ Metalsmith(__dirname)
   })
 
   .use(markdown())
-  .use(collections({ sortBy: 'date' }))
+  .use(collections({
+    blog: {
+      sortBy: 'date',
+      reverse: true,
+    },
+  }))
   .use(permalinks({ relative: false }))
 
   .use(discoverPartials({
