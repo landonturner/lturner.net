@@ -1,3 +1,4 @@
+<title>{{title}}</title>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -5,7 +6,18 @@
 
 <meta property="og:title" content="{{title}}"/>
 <meta property="og:type" content="website"/>
-<!--<meta property="og:image" content="/img/logo.png"/> TODO I NEED A LOGOOOOO-->
+{{!-- <meta property="og:image" content="/img/logo.png"/> TODO I NEED A LOGOOOOO --}}
 <meta property="og:url" content="https://lturner.net/{{path}}"/>
 <meta property="og:site_name" content="Landon Turner"/>
 <meta property="og:description" content="{{description}}" />
+
+{{#if production}}
+  {{!-- Global site tag (gtag.js) - Google Analytics --}}
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135102871-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-135102871-1');
+  </script>
+{{/if}}
