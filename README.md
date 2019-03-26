@@ -11,7 +11,8 @@ npm run build
 
 #### Development Mode
 ```bash
-npm run prod
+docker-compose up -d
+npm run watch
 ```
 
 ### Project Structure
