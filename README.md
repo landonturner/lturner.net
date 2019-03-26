@@ -19,4 +19,4 @@ npm run watch
 
 Put markdown files in `/source/blog`. Those get turned into blog posts. The
 site will be built into the `dist` folder. Any asset or image gets copied into
-that folder as well. (JS and SASS will be transformed). Have fun!
+that folder as well. (JS and SASS will be transformed).
