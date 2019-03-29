@@ -1,8 +1,8 @@
 ---
 title: Signing and Encrypting with GPG
 layout: blog-post.hbs
-date: 2019-03-28
-displayDate: March 28, 2019
+date: 2019-03-29
+displayDate: March 29, 2019
 collection: blog
 description: Explore creating gpg keys on a Mac through the terminal. Sign and encrypt text with the key. Register the keys with a remote key service so people can verify your signatures.
 ---
@@ -257,18 +257,18 @@ github repo without the signature included._
 ```
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEE6bHUCalLd6sr8vTYaCdGIAS0ItIFAlyeTGwACgkQaCdGIAS0
-ItLbuA//fxyB33t4RshCTwNOVqugoal6+OatHCal0LDhsj60Qf27THtUy4Y5UV7H
-/H/WWyIixaH29Ydc8KI2QM5XYkFR1d7n9/Ga6mcBC7azhOVQithdnQMg9Gcv5Nsg
-O9C/GUt/ooZo+2FPc03tXalPrxzgQEdWJT0j6/+XmuUwNBmlwkG2+o2gX83bLpj+
-h+lobKci5rNUJrZbsq0pEIVkhGSaqIsCpS4ig8Jpai4L5QOF6npkFpdoSlK378R8
-ZOccftIcw5V2rQ7+wjJ8hb+9xWc/Z+uR4GoH0ZD0iNgRKXLz779h/X1VJqgp7Z7V
-2zIsTkx8P8/3MYnB98qk6r4zLAJ8qiV14UOM2rL+sU/lUzPegCrrdT75W984htLO
-TZfd5Xr0PTryjVHRzmoRFbFpGzg/1HGttZsUDeSXYomrauox6+nN4a+cf6LmH7zB
-laHJ7KC4/QfgBTQmfMcr8Qdmz7gDZV/suqXG83vFMgBJPZC0IoVzNPqm2J/cPAT4
-zXYFi8Cin6VRSnH8VP1RdrDiOb05Upc3lB8vneFkqIb3K2qioihEUIPDN65ZNxbP
-/K/zuQUrCYuGrvwf3YvXiUKTK9m9JImRGKbxSurGkapWnrPW0pHIv4wq8a+Tf3Oa
-mHU8HuX9MzPT9425Tp5ORG8tDb8DmK0Xa2/HUjndO2qSs/kBsDk=
-=dnFJ
+iQIzBAABCAAdFiEE6bHUCalLd6sr8vTYaCdGIAS0ItIFAlyeUBAACgkQaCdGIAS0
+ItLXnw//dzgZeb3nJVyxNR+5gjwiiKjqLniq0AFFBgdhD6/gSuzHcrH9nWLjAJTV
+4adwtsTOKtJQrcrsyxQEqKxiQHlBu9UqyEaoU39f8QBNbSbSMdy5qF2Jw25jU1gG
+eqYg/sI/51DO17LzhgIvTtyDssFzEd3SqZXbeDA8d6AITGUkYRMV2EjGJ0amAAkm
+CBlyC1UY3lmbEa6fDaX6OkUmb/fTERCAEnXrOFlsCNKHskzAKeSH81sXXEEB9lkV
+vXhyI0He8q+bUYqLSAk2N/9XdEkgRNhom4rM+f63nZvrtRkxjBU851WA7UH9xU2z
+ihvgJughw1Pm5ZNEsMAFU4lJxXCFPb8s7XG81cqe0ryvPMdBp8NqRbBq83lrwvJ1
+DhvShbMsTGjTbstbat2wk2Bnr27ZUWol/tHeKAE9ah5W8eeBGoE1mIIBIr/OWPFZ
+VAIxzkkV/eGEae9P0eVZITqpOAEEzlyGl5tSSfDnlbEXsLyZ/yAHf/PTfgWd/HVx
+UCnJPz/jnC3/EjwkzCPmk7Hu0jpVItPPr5S0a/Cihs+bEBeP8MdZ06dnnkbB1Rmy
+O3Ux6CNkPe4WFaNOlL1ac4foG+/Vk9v+qemoWB1OWhrakijAOTptPwFod2Th3VlZ
+vG8B70lT8eSFc7uV9u8CzH2DzgwK12wwAl/a5bIWnJn+DCKHf6k=
+=ZSZA
 -----END PGP SIGNATURE-----
 ```
