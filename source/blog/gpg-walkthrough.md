@@ -225,11 +225,14 @@ email tim@apple.com and tricking people into thinking I was Tim.
 remote centos instance. I will come back later and link the stack overflow that
 has my answer.*
 
+*UPDATE*: I was able to get the ubuntu keyserver keyserver.ubuntu.com to work.
+Thanks ubuntu gods.
+
 #### Registering Your Keys
 
 ```bash
-gpg --send-keys --keyserver pgp.mit.edu 6827462004B422D2
-# gpg: sending key 6827462004B422D2 to hkp://pgp.mit.edu
+gpg --send-keys --keyserver keyserver.ubuntu.com 6827462004B422D2
+# gpg: sending key 6827462004B422D2 to hkp://keyserver.ubuntu.com
 ```
 
 #### Pulling Keys From Server
@@ -239,7 +242,11 @@ to tweet encrypted messages at me if you wanted, or verify the signature of
 this post.
 
 ```bash
-gpg --recv-keys --keyserver pgp.mit.edu 6827462004B422D2
+gpg --recv-keys --keyserver keyserver.ubuntu.com 6827462004B422D2
+# gpg: requesting key 04B422D2 from hkp server keyserver.ubuntu.com
+# gpg: key 04B422D2: public key "Landon Turner <MY_EMAIL>" imported
+# gpg: Total number processed: 1
+# gpg:               imported: 1  (RSA: 1)
 ```
 
 ## Using With GitHub
@@ -257,18 +264,18 @@ github repo without the signature included._
 ```
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEE6bHUCalLd6sr8vTYaCdGIAS0ItIFAlyeUGQACgkQaCdGIAS0
-ItKxWw//ZHpsr0DskQuC9jcJxom8weJtRY1vqGCEBHqG8dSvMrS3YJFs6Lu2Abe6
-olqoofZaB0tanXKtJ/Eb22rtLmKu0aZazzFqr8gFLpIMisdh6U6jIkmxY79Pxkrw
-JP5DhEqiEegP49lK29q+z2u8PfGcM2Nwvig9oMKth8j2iJ5fEsCMC2oo8q04LOLW
-A+blWDaaBmWmtHumxUJ7R5TZUNws2LYA8KGZx6DwxICe7jdt7VSBhznGHzCW1h7L
-PUJQOC/3rR3xTDRdkCdMznoqIrBFQMZ4HamNIQdocw54SBjegD1dkB5csEVbGPNK
-HO9MehIEwJEeH2/jd5BYggxt2haPM41ENKJejLkeb1va0s6cl2eik8mUvKSE1AuC
-rLtNfiVrQajE9nKl+y+L3TYV94GbIoHaBSBv/+aT0IHr2yqqa7UuksA8J0Tw46Su
-HrBVnzopePUMy66oBwKKcTlB/3vSQE97r4UHqgdLckgdREitOdzrNavlGQhqci+Q
-fzSFmHwTmXiSEwJAz6e+C6/o4mKhTCHxXnRT068tPWCL99xKVvQoMkbPYafgSptQ
-KeoX1vnKvOZzmFs6EOcL9DmNq2fkxUA2272y2uSeKOTqmFwK2LXeX3O9zx55rPTN
-t5q2OWUycEl51AgYjYr8avta+h8hEcvw41sKONqkmtwJFx7Z8y4=
-=EKz8
+iQIzBAABCAAdFiEE6bHUCalLd6sr8vTYaCdGIAS0ItIFAlyeXtIACgkQaCdGIAS0
+ItKthBAAkW9VPbXfT7885vmL1SbZa8CT5KymAzoDHwDzQF4FzEZfxj9gNseQzsKJ
+y2mkFUtqN/DFneaAma9tgCA3+38fXTgXIoh8YYoTvVo2sszAuXuaARd0pPrHz2dd
+R6GjmU7c2a/FFfN08s5QJDNf636ld/fteJlvqhK5dvsc8LFo5aQFskz2ZZ4IF+x6
+6zDl00wN9UQwIC49iuDC76Gi6FxFxuJ0x9Xm1hl6OkhSmMwbSv2Anz/6waoiV185
+GhRfr30vNk1qsu02tD8sOONwQACCpeE95UjEkp/bL3dIHOB8lEEyHgoLmVaxe2GO
+ZMitRkKRPcmWXlluNW1ydIxwcuWXSqzpd5PrIQf1+EFE7+y+IYXM5SlXmw2RrQ0t
+kadcXlOJ6OmqKYcHRnieL6mbSYKBRkVyLz6t6mUi5/cXJ9g/vJWa28nL/xc4nEI/
+qn7GJTPd+U9NRQEMfz48eTxIYlB947Oli06AwM1ehN4E9kCNfQJSL7/nCGVKK/Nq
+s9v0BIq1Zol6bMAGRMRlnAPGVBW9EWxuMDEGsJrXDhOSdRmnrv9EnngKluNR9h+q
+/wD8N+s2Mp5pVEDreJGP+qMgVoLCfwxnFzQ+9o9mgz6dnc7b35S+XZGF2pZqqMB0
++C+ocTgh0GxXBQDdc8uQOU8u5WXH5OjjpGz86WSO4l7J74z5VrU=
+=WrZd
 -----END PGP SIGNATURE-----
 ```
