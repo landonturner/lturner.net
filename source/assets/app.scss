@@ -38,3 +38,14 @@ img {
 pre {
   color: rgb(150, 150, 150);
 }
+
+a {
+  word-break: break-all;
+}
+
+iframe {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
