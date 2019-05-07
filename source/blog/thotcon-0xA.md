@@ -7,18 +7,18 @@ collection: blog
 description: This is a write-up of the Thotcon CTF put on by the token.wtf team. My team took first place for the second year in a row, which earned us a gold badge worth free entry next year.
 ---
 
-[Thotcon](https://www.thotcon.org) is self described as Chicago's Hacking
-Conference. The community that runs the conference is composed of run by a
-bunch of really great people who are always excited and enthusiastic about
-hacking in general. The glorious leader, c7five, has announced at least another
-0xA years running thotcon, so I urge you all to come next year to fight for
-second place in this ctf :)
+[Thotcon](https://www.thotcon.org) is self-described as Chicago's Hacking
+Conference. The community that runs the conference is run by a bunch of really
+great people who are always excited and enthusiastic about hacking in general.
+The glorious leader, c7five, has announced at least another 0xA years running
+thotcon, so I urge you all to come next year to fight for second place in this
+ctf :)
 
 [Jim Covert](https://jcovert.com) and I won last year, but this year we were
 able to recruit a few more people. Patrick "YOLO" Mcdonald joined us for the
 whole journey. Evan White was there for the first day and a half. I think the
 common perception of hackers are hooded individuals wearing fingerless gloves
-and dark sunglasses who are cold and distant its all true, except we are
+and dark sunglasses who are cold and distant it's all true, except we are
 actually very friendly, and was able to make a new friend, a student at
 UChicago [Claude](https://twitter.com/__laudecay__).
 
@@ -43,7 +43,7 @@ authenticate when claiming tokens.
 #### Checking Scores
 
 In order to check the score, a quick curl to `api.token.wtf/score` is needed.
-By the end there were enough teams to make the output jumbled so I wrote a
+By the end, there were enough teams to make the output jumbled so I wrote a
 quick python formatter.
 
 ```python
@@ -83,7 +83,7 @@ stage were also given. The urls of all the stages follow this format
 `https://token.wtf/stages/<stage number>-<sha256sum previous token>.html`.
 
 *PRO TIP*: when using bash to do the hash, you can echo the key to shasum, but do
-not forget the `-n` flag or else you will be also hasing the newline and that
+not forget the `-n` flag or else you will be also having the newline and that
 will burn at least 10 minutes.
 
 ```bash
@@ -94,7 +94,7 @@ echo -n 93f4f193-62a5-4bec-acaa-f17322bdc65e | shasum -a 256
 So the next stage is located at
 https://token.wtf/stages/1-08f12daef7c0b48a4530c21fbfd713db8ae6cfda8e982799bd775adf76eeb636.html.
 
-## C'est ne pas un JPG
+## Not Really a Picture
 
 You can hide things in pictures, I can hide things in pictures, Thotcon opers
 DO hide things in pictures. They tweeted out a picture with a qr code on it. We
@@ -142,8 +142,8 @@ too long trying to figure out that it wasn't really gunzip we needed but unzip.
 #    skipping: aaaaaaaaa.png           need PK compat. v5.1 (can do v4.5)
 ```
 
-After googling, turns out its not really unzip we needed but 7z. Using 7z we
-got to a point where it asked us for a password. Eventually we discovered that
+After googling, turns out it's not really unzip we needed but 7z. Using 7z we
+got to a point where it asked us for a password. Eventually, we discovered that
 our password was this string `AMAxYguiCAScumANeLCH` which was embedded in our
 image.
 
@@ -155,7 +155,7 @@ https://token.wtf/stages/2-1cb88db26fd2d30eb312d9ddd732e2c6fc58373888279e40932b2
 
 The clue for this challenge is `Spend some time in your FAVorite first person
 shooter! Play!`. We immediately thought FAVicon. The link for play led us to a
-full in browser version of Quake 3. The favicon was changing every few seconds.
+full in-browser version of Quake 3. The favicon was changing every few seconds.
 Using the network tab in Chrome we could see each was a number and I recorded
 the following sequence.  I opened the inspector tab and recorded the following
 infinite sequence of numbers.
@@ -174,8 +174,8 @@ interesting names. We grabbed a screenshot.
 
 ![noob slayer 69](/images/NOOB_SLAYER69.jpg)
 
-Eventually the arangement `365ffb4c-4ef5-a030-5fa9-740f1518c336` resulted in
-the successful token submission. I also mean spiritedly changed my name to
+Eventually the arrangement `365ffb4c-4ef5-a030-5fa9-740f1518c336` resulted in
+the successful token submission. I also mean-spiritedly changed my name to
 something like `235d` to throw the other people off. I feel bad about doing it,
 but also it was pretty obvious who were the bots and who were the assholes
 because bots had 0 ping.
@@ -265,7 +265,7 @@ https://token.wtf/stages/4-cd22e9b35756bf2b94b1124ac72aee9a29966399b6e059e06516c
 <iframe width="639" height="360" src="https://www.youtube.com/embed/UGAao4MRIu0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 This video has two voices both speaking in Russian. The main track turns into a
-rick roll. In the background you can hear another voice say letters and
+rickroll. In the background, you can hear another voice say letters and
 numbers. We found a very nice Russian speaker who was able to help us with the
 translation and also became a member of the team for the rest of our journey. I
 am also now somewhat okay at counting to девять in Russian. We were able to use
@@ -298,8 +298,9 @@ As you can see the binary says `Flipit`.
 ```
 
 The ctf organizers thought that it was hysterical that we destroyed the puzzle.
-Once we recreated the it again, we used the thotcon program to flipit. There was a black
-light in the room because we could see a faint QR code on the back. It was glow in the dark paint.
+Once we recreated it again, we used the thotcon program to flipit. There was a
+black light in the room because we could see a faint QR code on the back. It
+was glowing in the dark paint.
 
 
 ![qr](/images/qrglow.jpg)
@@ -378,7 +379,7 @@ all the code he used for these challenges and when he does I will link it here.
 Josh had set up a physical box with 5 usb ports on it, one COMMAND port and 4
 memory ports labeled A, B, C and D. I learned that the first 512 bytes of a
 flash drive inserted into the command drive would be run as the program. A, B
-and C are read only memory devices, and D was write only.
+and C are read-only memory devices, and D was write only.
 
 Before attempting to solve the puzzle, I needed to know I was structuring my
 code, building the binaries, and flashing my thumb drives correctly. I wrote a
@@ -399,7 +400,7 @@ I saved that to a file named `program.ass`, and used his compiler like this:
 ./vasm-tools/vasm-mach -in program.ass -out program.bin
 ```
 
-I loaded up a thumbdrive and unmounted all partitions on it so I could use `dd`
+I loaded up a thumb drive and unmounted all partitions on it so I could use `dd`
 to push the files directly to the drive, but first I needed to zero out the drive
 of unwanted data over the first 1024 bytes.
 
@@ -415,7 +416,7 @@ program slot and was thankfully greeted with a `!`. Test successful.
 
 The "security module" takes a key that I was able to find embedded on the
 website `<!-- Blue Key: 2e090af9ff23e35240261e08769dd0df -->`. My first thought
-was to load this data file up on a thumb drive 2, and load the password on
+was to load this data file up on a thumb drive 2 and load the password on
 thumb drive 3. This was not the working solution because I ran out of thumb
 drives. Here is how I converted that string into bytes to be put on the flash
 drive anyway.
@@ -471,7 +472,7 @@ SXKLOC 0x02 0x00
 
 # Map the input data in port A to 0x03
 DMAP 0x0A 0x03
-# Map the thumbdrive to save the output in port D
+# Map the thumb drive to save the output in port D
 DMAP 0x0D 0x04
 
 # Decrypt page 3 (our data) and copy to
@@ -518,6 +519,12 @@ xxd ./green-decoded.dat
 
 This revealed our final key `314adaca-221c-4f58-897f-9edf163cb440`.
 
+## Conclusion
 
+Jim and Claude were able to put us 2 tokens past everyone else once they had
+finished the challenges they were working on.
+
+Thank you for reading this, or otherwise, thank you for clicking the link and
+scrolling to the bottom.
 
 
