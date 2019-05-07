@@ -131,10 +131,11 @@ strings ambiguous.jpg | awk 'length>10'
 ```
 
 The picture itself provided us with the last clue we needed. The three
-emojis in that image: 🔫🤐🇮 translates to GUNZIP IT. We spent
+emojis in that image: 🔫🤐🇮🇹  GUNZIP IT. We spent
 too long trying to figure out that it wasn't really gunzip we needed but unzip.
 
 ```bash
+unzip ambiguous.jpg
 # Archive:  ambiguous.jpg
 #    skipping: .untitled.txt           need PK compat. v5.1 (can do v4.5)
 #    skipping: aaaaaaaaa.png           need PK compat. v5.1 (can do v4.5)
