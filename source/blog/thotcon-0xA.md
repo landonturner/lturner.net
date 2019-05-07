@@ -73,9 +73,6 @@ request must be cryptographically signed in order to verify your identity. When
 a correct token is submitted, the api will return a `201 CREATED`, and
 otherwise it will return a `406 INVALID`.
 
-## TODO Should I even put this code up? is it worth anything?
-
-
 ## Gimme Token
 
 The first token is a gimme. It was given plainly on the website.
