@@ -9,18 +9,19 @@ description: This is a write-up of the Thotcon CTF put on by the token.wtf team.
 
 [Thotcon](https://www.thotcon.org) is self-described as Chicago's Hacking
 Conference. The community that runs the conference is run by a bunch of really
-great people who are always excited and enthusiastic about hacking in general.
+great people who are always excited and enthusiastic about hacking and infosec.
 The glorious leader, c7five, has announced at least another 0xA years running
-thotcon, so I urge you all to come next year to fight for second place in this
-ctf :)
+thotcon, so I urge you all to come next year to fight for second place in next
+years ctf :)
 
 [Jim Covert](https://jcovert.com) and I won last year, but this year we were
-able to recruit a few more people. Patrick "YOLO" Mcdonald joined us for the
-whole journey. Evan White was there for the first day and a half. I think the
-common perception of hackers are hooded individuals wearing fingerless gloves
-and dark sunglasses who are cold and distant it's all true, except we are
-actually very friendly, and was able to make a new friend, a student at
-UChicago [Claude](https://twitter.com/__laudecay__).
+able to recruit a few more people. Patrick "YOLO" McDonald joined us for the
+whole journey. Evan White was there for the first day and a half. We were able
+to make a new friend part way through with a current student at UChicago
+[Claude](https://twitter.com/__laudecay__).
+
+We were able to take first place this year and were awarded with the coveted
+gold badge.
 
 ![gold badge](/images/thotcon-0xa-gold.jpeg)
 
@@ -363,8 +364,8 @@ https://token.wtf/stages/6-94cf08ba1bcbec4270946d0aff36634092008fc6f636bcaeef201
 We were running out of time at thotcon so our organizers "warped" us and gave
 us the last three challenges at once. Here we broke off. Jim took care of the
 forensics puzzle which he details [here on his
-blog](https://jcovert.com/thotcon-0xa-token-wtf-writeup/). Claude went over the
-network challenge.
+blog](https://jcovert.com/thotcon-0xa/#part-b---forensics-examination). Claude went over the network
+challenge.
 
 ## GradeCom Assembly
 
@@ -522,7 +523,9 @@ This revealed our final key `314adaca-221c-4f58-897f-9edf163cb440`.
 ## Conclusion
 
 Jim and Claude were able to put us 2 tokens past everyone else once they had
-finished the challenges they were working on.
+finished the challenges they were working on. Thotcon was a blast again this
+year and we are looking forward to next year. I know now that I need to put
+more flash drives, a black light and some other gear into my ctf kit.
 
 Thank you for reading this, or otherwise, thank you for clicking the link and
 scrolling to the bottom.
