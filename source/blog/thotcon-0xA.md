@@ -20,7 +20,9 @@ whole journey. Evan White was there for the first day and a half. I think the
 common perception of hackers are hooded individuals wearing fingerless gloves
 and dark sunglasses who are cold and distant its all true, except we are
 actually very friendly, and was able to make a new friend, a student at
-UChicago Claude Somethingorother.
+UChicago [Claude](https://twitter.com/__laudecay__).
+
+![gold badge](/images/thotcon-0xa-gold.jpeg)
 
 ## Interacting with the API
 
